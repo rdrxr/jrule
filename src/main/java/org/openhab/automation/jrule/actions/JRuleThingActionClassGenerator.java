@@ -17,7 +17,6 @@ import java.io.FileWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.openhab.automation.jrule.internal.JRuleConfig;
@@ -187,8 +186,8 @@ public class JRuleThingActionClassGenerator extends JRuleAbstractClassGenerator 
                                 Map<Object, Object> arg = new HashMap<>();
                                 Class<?> parameterType = replaceTypeIfNecessary(parameter.getType());
                                 arg.put("type", parameterType.getTypeName());
-                                arg.put("reflectionType", ClassUtils.primitiveToWrapper(parameter.getType())
-                                        .getTypeName().replaceFirst("java.lang.", ""));
+                                arg.put("reflectionType",
+                                        parameter.getType().getTypeName().replaceFirst("java.lang.", ""));
                                 arg.put("name", parameter.getAnnotation(ActionInput.class).name());
                                 args.add(arg);
                             }
